@@ -73,15 +73,19 @@
                                 </form>
                             @endif
 
-                            <select class="kh-role-select" onchange="changeUserRole(event, {{ $user->id }}, '{{ $user->name }}', this.value)">
-                                <option value="user" {{ $user->role == 'user' ? 'selected' : '' }}>User</option>
-                                <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
-                            </select>
+                            @if(auth()->id() !== $user->id)
+                                <select class="kh-role-select" onchange="changeUserRole(event, {{ $user->id }}, '{{ $user->name }}', this.value)">
+                                    <option value="user" {{ $user->role == 'user' ? 'selected' : '' }}>User</option>
+                                    <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
+                                </select>
 
-                            <button class="kh-action-btn kh-btn-delete" onclick="deleteUser(event, {{ $user->id }})" style="border:none; cursor:pointer;">Xóa</button>
-                            <form id="delete-form-{{ $user->id }}" action="{{ route('users.destroy', $user->id) }}" method="POST" style="display: none;">
-                                @csrf @method('DELETE')
-                            </form>
+                                <button class="kh-action-btn kh-btn-delete" onclick="deleteUser(event, {{ $user->id }})" style="border:none; cursor:pointer;">Xóa</button>
+                                <form id="delete-form-{{ $user->id }}" action="{{ route('users.destroy', $user->id) }}" method="POST" style="display: none;">
+                                    @csrf @method('DELETE')
+                                </form>
+                            @else
+                                <span style="font-size: 0.85rem; color: #94a3b8; font-style: italic;">Tài khoản của bạn</span>
+                            @endif
                         </div>
                     </td>
                 </tr>
@@ -130,11 +134,15 @@
                         <button type="submit" class="kh-action-btn" style="background:#dcfce7; color:#15803d; border:none;">Duyệt ngay</button>
                     </form>
                 @endif
-                <select class="kh-role-select" onchange="changeUserRole(event, {{ $user->id }}, '{{ $user->name }}', this.value)" style="margin-right: 8px;">
-                    <option value="user" {{ $user->role == 'user' ? 'selected' : '' }}>User</option>
-                    <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
-                </select>
-                <button class="kh-action-btn kh-btn-delete" onclick="deleteUser(event, {{ $user->id }})" style="border:none;">Xóa</button>
+                @if(auth()->id() !== $user->id)
+                    <select class="kh-role-select" onchange="changeUserRole(event, {{ $user->id }}, '{{ $user->name }}', this.value)" style="margin-right: 8px;">
+                        <option value="user" {{ $user->role == 'user' ? 'selected' : '' }}>User</option>
+                        <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
+                    </select>
+                    <button class="kh-action-btn kh-btn-delete" onclick="deleteUser(event, {{ $user->id }})" style="border:none;">Xóa</button>
+                @else
+                    <span style="font-size: 0.85rem; color: #94a3b8; font-style: italic; margin-left: auto;">Tài khoản của bạn</span>
+                @endif
             </div>
         </div>
         @endforeach

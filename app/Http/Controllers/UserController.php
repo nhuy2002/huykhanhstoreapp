@@ -73,6 +73,10 @@ class UserController extends Controller
             'role' => 'required|in:admin,user'
         ]);
 
+        if (auth()->id() == $id) {
+            return back()->with('error', 'Không thể thay đổi quyền của chính mình!');
+        }
+
         $user = User::findOrFail($id);
         $oldRole = $user->role;
         $user->update(['role' => $request->role]);

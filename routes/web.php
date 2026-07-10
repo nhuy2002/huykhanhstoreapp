@@ -17,6 +17,27 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [AuthController::class, 'register'])->middleware('throttle:3,5');
 });
 
+Route::middleware(['auth', 'admin'])->group(function () {
+    // [SEC-TASK-002] Quản lý sản phẩm (chỉ Admin)
+    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+    Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+    Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+    Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+
+    // Quản lý đơn hàng (chỉ Admin xem/sửa/xóa)
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/{id}/edit', [OrderController::class, 'edit'])->name('orders.edit');
+    Route::put('/orders/{id}', [OrderController::class, 'update'])->name('orders.update');
+    Route::delete('/orders/{id}', [OrderController::class, 'destroy'])->name('orders.destroy');
+
+    // Quản lý người dùng (chỉ Admin)
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::patch('/users/{id}/approve', [UserController::class, 'approve'])->name('users.approve');
+    Route::patch('/users/{id}/change-role', [UserController::class, 'changeRole'])->name('users.change-role');
+    Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+});
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/change-password', [AuthController::class, 'showChangePasswordForm'])->name('password.change');
@@ -40,23 +61,4 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/access-denied', [App\Http\Controllers\ErrorController::class, 'accessDenied'])->name('error.access-denied');
 });
 
-Route::middleware(['auth', 'admin'])->group(function () {
-    // [SEC-TASK-002] Quản lý sản phẩm (chỉ Admin)
-    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-    Route::post('/products', [ProductController::class, 'store'])->name('products.store');
-    Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
-    Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
-    Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 
-    // Quản lý đơn hàng (chỉ Admin xem/sửa/xóa)
-    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
-    Route::get('/orders/{id}/edit', [OrderController::class, 'edit'])->name('orders.edit');
-    Route::put('/orders/{id}', [OrderController::class, 'update'])->name('orders.update');
-    Route::delete('/orders/{id}', [OrderController::class, 'destroy'])->name('orders.destroy');
-
-    // Quản lý người dùng (chỉ Admin)
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
-    Route::patch('/users/{id}/approve', [UserController::class, 'approve'])->name('users.approve');
-    Route::patch('/users/{id}/change-role', [UserController::class, 'changeRole'])->name('users.change-role');
-    Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
-});

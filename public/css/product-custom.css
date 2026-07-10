@@ -301,6 +301,29 @@
     background-color: #007bff;
 }
 
+/* Primary Form Button */
+.kh-btn-primary {
+    background-color: #4f46e5;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.kh-btn-primary:hover {
+    background-color: #4338ca;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transform: translateY(-1px);
+}
+
 /* Responsive Styles */
 @media (max-width: 768px) {
     .kh-table-wrapper { display: none; }

@@ -38,9 +38,15 @@
 <body class="home">
     @include('partials.header')
 
-    <main>
+    <main style="min-height: calc(100vh - 150px);">
         @yield('content')
     </main>
+
+    <!-- Footer -->
+    <footer style="background-color: #f1f5f9; padding: 15px 0; text-align: center; border-top: 1px solid #e2e8f0; color: #64748b; font-size: 0.85rem; width: 100%;">
+        © 2026 Develop by VẠN SỰ NHƯ Ý | Ver 1.0.1
+    </footer>
+
     @include('components.mobile-menu')
     <script src="{{ asset('js/mobile-menu.js') }}"></script>
     <script src="{{ asset('js/header.js') }}"></script>

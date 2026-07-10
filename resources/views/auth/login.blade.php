@@ -59,7 +59,7 @@
                     <input type="checkbox" id="remember" name="remember">
                     <span>Ghi nhớ tôi</span>
                 </label>
-                <a href="#" class="kh-forgot-link">Quên mật khẩu?</a>
+                <a href="javascript:void(0)" onclick="showForgotPasswordModal()" class="kh-forgot-link">Quên mật khẩu?</a>
             </div>
 
             <button type="submit" class="kh-btn-submit">Đăng nhập ngay</button>
@@ -184,6 +184,39 @@
         checkPhone(false);
         checkPassword(false);
     });
+
+    function showForgotPasswordModal() {
+        Swal.fire({
+            title: 'Khôi phục mật khẩu',
+            html: `
+                <div style="text-align: left; margin-top: 15px;">
+                    <p style="color: #475569; font-size: 0.95rem; line-height: 1.5; margin-bottom: 15px;">
+                        Vì lý do bảo mật hệ thống, chức năng tự đặt lại mật khẩu đã bị vô hiệu hóa.
+                    </p>
+                    <p style="color: #1e293b; font-weight: 500; margin-bottom: 10px;">
+                        Vui lòng liên hệ Super Admin:
+                    </p>
+                    <div style="background: #f8fafc; border: 1px dashed #cbd5e1; padding: 15px; border-radius: 8px; display: flex; align-items: center; gap: 15px;">
+                        <img src="https://cdn.haitrieu.com/wp-content/uploads/2022/01/Logo-Zalo-Arc.png" style="width: 45px; height: 45px;" alt="Zalo">
+                        <div>
+                            <div style="font-weight: 700; color: #0068ff; font-size: 1.2rem; letter-spacing: 0.5px;">0386 865 717</div>
+                            <div style="font-size: 0.85rem; color: #64748b; margin-top: 2px;">Hỗ trợ Zalo 24/7</div>
+                        </div>
+                    </div>
+                </div>
+            `,
+            showCancelButton: true,
+            confirmButtonColor: '#0068ff', // Zalo Blue
+            cancelButtonColor: '#e2e8f0',
+            confirmButtonText: '<b style="color:white">Nhắn tin Zalo ngay</b>',
+            cancelButtonText: '<b style="color:#475569">Đóng</b>',
+            width: '450px'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.open('https://zalo.me/0386865717', '_blank');
+            }
+        });
+    }
 </script>
 </body>
 </html>
