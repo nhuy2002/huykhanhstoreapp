@@ -48,12 +48,12 @@
 <script>
 // Announcement Popup JavaScript
 document.addEventListener('DOMContentLoaded', function() {
-    // Check if popup should be shown (once per 30 minutes)
+    // Check if popup should be shown (once per 6 hours)
     const lastShown = localStorage.getItem('announcement_last_shown');
     const now = Date.now();
-    const thirtyMinutes = 1 * 60 * 1000; // 30 minutes in milliseconds
+    const sixHours = 6 * 60 * 60 * 1000; // 6 hours in milliseconds
 
-    if (!lastShown || (now - parseInt(lastShown)) > thirtyMinutes) {
+    if (!lastShown || (now - parseInt(lastShown)) > sixHours) {
         // Show popup after a short delay for better UX
         setTimeout(() => {
             showAnnouncementPopup();

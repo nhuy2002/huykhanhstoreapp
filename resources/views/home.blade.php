@@ -17,6 +17,8 @@
             </div>
         </div>
 
+        {{-- [SEC-TASK-003] Chỉ Admin mới xem được dữ liệu kinh doanh --}}
+        @if($isAdmin)
         <div class="k-widgets-grid">
             
             {{-- WIDGET 1: DOANH THU (ĐỘNG) --}}
@@ -76,7 +78,9 @@
             </a>
 
         </div>
+        @endif
 
+        @if($isAdmin)
         <div class="k-section-header">
             <h3 class="k-section-title">Đơn hàng mới nhất</h3>
             <a href="{{ route('orders.index') }}" class="k-section-more">Xem tất cả</a>
@@ -133,6 +137,7 @@
             @endforelse
 
         </div>
+        @endif
 
         <div class="k-section-header">
             <h3 class="k-section-title">Bảng tin</h3>

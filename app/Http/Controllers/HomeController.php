@@ -12,27 +12,28 @@ class HomeController extends Controller
 
     public function index()
     {
-        // 1. Tổng doanh thu (Chỉ tính các đơn đã hoàn thành)
-        $totalRevenue = Order::where('status', 'completed')->sum('total_amount');
+        $data = [];
 
-        // 2. Tổng số đơn hàng
-        $totalOrders = Order::count();
+        // [SEC-TASK-003] Chỉ Admin mới xem được dữ liệu nhạy cảm
+        if (auth()->user()->role === 'admin') {
+            // 1. Tổng doanh thu (Chỉ tính các đơn đã hoàn thành)
+            $data['totalRevenue'] = Order::where('status', 'completed')->sum('total_amount');
 
-        // 3. Đơn hàng trong ngày hôm nay
-        $ordersToday = Order::whereDate('created_at', Carbon::today())->count();
+            // 2. Tổng số đơn hàng
+            $data['totalOrders'] = Order::count();
 
-        // 4. Tổng số tài khoản (User)
-        $totalUsers = User::count();
+            // 3. Đơn hàng trong ngày hôm nay
+            $data['ordersToday'] = Order::whereDate('created_at', Carbon::today())->count();
 
-        // 5. Lấy 3 đơn hàng mới nhất (Kèm thông tin items để đếm số lượng món)
-        $recentOrders = Order::withCount('items')->latest()->take(3)->get();
+            // 4. Tổng số tài khoản (User)
+            $data['totalUsers'] = User::count();
 
-        return view('home', compact(
-            'totalRevenue', 
-            'totalOrders', 
-            'ordersToday', 
-            'totalUsers', 
-            'recentOrders'
-        ));
+            // 5. Lấy 3 đơn hàng mới nhất
+            $data['recentOrders'] = Order::withCount('items')->latest()->take(3)->get();
+        }
+
+        $data['isAdmin'] = auth()->user()->role === 'admin';
+
+        return view('home', $data);
     }
-}
+}

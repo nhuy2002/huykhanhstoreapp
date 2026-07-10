@@ -50,6 +50,13 @@
     const allProducts = @json($products);
     let cart = [];
 
+    // [SEC-TASK-013] Escape HTML để ngăn XSS qua product name/description
+    function escapeHtml(str) {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    }
+
     // 1. Render Danh sách sản phẩm (Bên trái)
     function renderProducts(products) {
         const container = document.getElementById('product-list');
@@ -68,7 +75,7 @@
                 <div class="kh-pos-item" onclick="addToCart(${p.id})">
                     <img src="${imgSrc}" class="kh-pos-img" loading="lazy">
                     <div class="kh-pos-info">
-                        <div class="kh-pos-name">${p.name}</div>
+                        <div class="kh-pos-name">${escapeHtml(p.name)}</div>
                         <div class="kh-pos-price">${price}</div>
                         <div class="kh-pos-stock">Kho: ${p.quantity}</div>
                     </div>
@@ -122,7 +129,7 @@
                     <img src="${imgSrc}" style="width:30px; height:30px; object-fit:cover; border-radius:4px; display:block; margin-bottom:5px;">
                     
                     <div class="kh-cart-info-box" style="flex:1;">
-                        <div style="font-weight:600; font-size:0.85rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${item.name}</div>
+                        <div style="font-weight:600; font-size:0.85rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(item.name)}</div>
                         <div style="font-size:0.75rem; color:#ef4444; font-weight:700;">${subtotal} đ</div>
                     </div>
 

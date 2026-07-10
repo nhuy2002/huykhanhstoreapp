@@ -45,7 +45,7 @@ class ProductController extends Controller
             'price.required' => 'Vui lòng nhập giá',
         ]);
 
-        $data = $request->all();
+        $data = $request->only(['name', 'price', 'quantity', 'status']);
         $data['sold'] = 0;
 
         if ($request->hasFile('image')) {
@@ -82,7 +82,7 @@ class ProductController extends Controller
             'status' => 'required|in:active,inactive',
         ]);
 
-        $data = $request->all();
+        $data = $request->only(['name', 'price', 'quantity', 'status']);
 
         if ($request->hasFile('image')) {
             if ($product->image && Storage::disk('public')->exists($product->image)) {
