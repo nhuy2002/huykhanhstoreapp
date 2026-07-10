@@ -1,0 +1,80 @@
+/* --- PAGINATION CUSTOM --- */
+.kh-pagination-wrapper {
+    display: flex;
+    justify-content: center; /* Căn giữa màn hình */
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.kh-pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 6px; /* Khoảng cách giữa các nút */
+    align-items: center;
+}
+
+.kh-page-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 5px;
+    border-radius: 8px; /* Bo góc mềm mại */
+    background-color: #fff;
+    border: 1px solid #e2e8f0;
+    color: #64748b;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+/* Sửa lỗi mũi tên khổng lồ */
+.kh-page-link svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* Hover hiệu ứng */
+.kh-page-link:hover {
+    border-color: #4f46e5;
+    color: #4f46e5;
+    background-color: #eef2ff;
+    transform: translateY(-1px);
+}
+
+/* Trang hiện tại (Active) */
+.kh-page-item.active .kh-page-link {
+    background-color: #4f46e5;
+    border-color: #4f46e5;
+    color: #ffffff;
+    box-shadow: 0 4px 6px rgba(79, 70, 229, 0.3);
+}
+
+/* Nút bị vô hiệu hóa (Disabled) */
+.kh-page-item.disabled .kh-page-link {
+    background-color: #f1f5f9;
+    color: #cbd5e1;
+    border-color: #e2e8f0;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* --- Responsive Mobile --- */
+@media (max-width: 480px) {
+    .kh-page-link {
+        min-width: 32px; /* Nhỏ lại chút trên mobile */
+        height: 32px;
+        font-size: 0.85rem;
+    }
+    
+    .kh-pagination {
+        gap: 4px;
+    }
+}
