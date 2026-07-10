@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -50,6 +51,13 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->update(['status' => 'reviewed']);
 
+        Log::info('Admin action', [
+            'actor' => auth()->id(),
+            'action' => 'approve_user',
+            'target' => $user->id,
+            'details' => ['status' => 'reviewed']
+        ]);
+
         return back()->with('success', "Đã phê duyệt tài khoản: {$user->name}");
     }
 
@@ -68,6 +76,13 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $oldRole = $user->role;
         $user->update(['role' => $request->role]);
+
+        Log::info('Admin action', [
+            'actor' => auth()->id(),
+            'action' => 'change_role',
+            'target' => $user->id,
+            'details' => ['old_role' => $oldRole, 'new_role' => $request->role]
+        ]);
 
         $roleText = ($request->role === 'admin') ? 'Admin' : 'User';
         return back()->with('success', 'Đã thay đổi vai trò của ' . $user->name . ' thành ' . $roleText);
@@ -89,6 +104,13 @@ class UserController extends Controller
         }
 
         $user->delete();
+
+        Log::info('Admin action', [
+            'actor' => auth()->id(),
+            'action' => 'delete_user',
+            'target' => $id,
+        ]);
+
         return back()->with('success', 'Đã xóa tài khoản thành công!');
     }
 }

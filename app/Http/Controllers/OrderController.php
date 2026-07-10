@@ -78,9 +78,9 @@ class OrderController extends Controller
         $qrContent = "";
 
         if ($totalAmount > 0) {
-            $bankId = env('VIETQR_BANK_ID');
-            $accountNo = env('VIETQR_ACCOUNT_NO');
-            $accountName = env('VIETQR_ACCOUNT_NAME');
+            $bankId = config('vietqr.bank_id');
+            $accountNo = config('vietqr.account_no');
+            $accountName = config('vietqr.account_name');
             
             $qrContent = "HKC " . substr(strval(time()), -6); 
 
@@ -162,7 +162,7 @@ class OrderController extends Controller
             }
 
             // Gửi mail
-            $adminEmail = env('ADMIN_EMAIL');
+            $adminEmail = config('custom.admin_email');
             if ($adminEmail) {
                 Mail::to($adminEmail)->send(new OrderPlacedMail($order));
             }

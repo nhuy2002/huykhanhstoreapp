@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class AuthController extends Controller
 {
@@ -17,7 +18,7 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|string|max:80',
             'phone' => 'required|string|size:10|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => ['required', 'string', 'confirmed', Password::min(8)->letters()->numbers()],
         ], [
             'phone.unique' => 'Số điện thoại này đã được đăng ký.',
             'password.confirmed' => 'Xác nhận mật khẩu không khớp.',
@@ -76,25 +77,18 @@ class AuthController extends Controller
 
     public function changePassword(Request $request)
     {
-        // Validate dữ liệu đầu vào
-        // Lưu ý: regex phải khớp với JS bên client bạn đã viết (chỉ chữ và số, 8-16 ký tự)
         $request->validate([
             'current_password' => 'required',
             'password' => [
                 'required',
                 'string',
-                'min:8',
-                'max:16',
-                'regex:/^[a-zA-Z0-9]+$/', // Chỉ cho phép chữ và số
+                Password::min(8)->letters()->numbers(),
                 'confirmed' // Tự động check khớp với password_confirmation
             ],
         ], [
             // Tùy chỉnh thông báo lỗi tiếng Việt
             'current_password.required' => 'Vui lòng nhập mật khẩu hiện tại.',
             'password.required' => 'Vui lòng nhập mật khẩu mới.',
-            'password.min' => 'Mật khẩu phải từ 8 ký tự trở lên.',
-            'password.max' => 'Mật khẩu không quá 16 ký tự.',
-            'password.regex' => 'Mật khẩu chỉ bao gồm chữ và số.',
             'password.confirmed' => 'Mật khẩu xác nhận không khớp.',
         ]);
 
@@ -111,6 +105,10 @@ class AuthController extends Controller
         $user->update([
             'password' => Hash::make($request->password)
         ]);
+
+        // [SEC-TASK-012] Invalidate các session khác
+        Auth::logoutOtherDevices($request->password);
+        $request->session()->regenerate();
 
         return back()->with('success', 'Đổi mật khẩu thành công!');
     }

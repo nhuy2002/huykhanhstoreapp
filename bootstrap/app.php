@@ -11,6 +11,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // [SEC-TASK-005] Kiểm tra trạng thái user trên mỗi request
+        $middleware->web(append: [
+            \App\Http\Middleware\CheckUserStatus::class,
+        ]);
+
         $middleware->alias([
             'admin' => \App\Http\Middleware\CheckAdminRole::class,
         ]);
