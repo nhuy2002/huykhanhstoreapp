@@ -1,0 +1,319 @@
+/* Reset cơ bản cho header */
+.kh-header-wrapper {
+    background-color: #004a99;
+    max-width: 100%;
+    color: #ffffff;
+    padding: 0 10px;
+    border-bottom: 1px solid #333;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+}
+
+.kh-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px; /* Chiều cao cố định cho header */
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* --- LOGO --- */
+.kh-header-logo img {
+    height: 55px; /* Chiều cao logo */
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
+/* --- NAVIGATION --- */
+.kh-header-nav {
+    flex-grow: 1; /* Đẩy menu ra giữa hoặc chiếm khoảng trống */
+    display: flex;
+    justify-content: flex-end; /* Căn menu lệch phải gần phần user */
+    margin-right: 30px;
+}
+
+.kh-menu-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 20px; /* Khoảng cách giữa các menu */
+}
+
+.kh-menu-link {
+    text-decoration: none;
+    margin-left: 10px;
+    color: #e0e0e0;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+}
+
+.kh-menu-link:hover {
+    color: #ff9f43; /* Màu cam giống logo khi hover */
+}
+
+/* --- HEADER DROPDOWN (Yêu cầu lắp đặt) --- */
+.kh-menu-dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.kh-dropdown-toggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0;
+}
+
+.kh-dropdown-arrow {
+    font-size: 12px;
+    line-height: 1;
+    transition: transform 0.2s ease;
+}
+
+.kh-menu-dropdown.open .kh-dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.kh-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    min-width: 240px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    pointer-events: none;
+
+    list-style: none;
+    margin: 0;
+    padding: 8px 0;
+}
+
+.kh-dropdown-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.kh-dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 20px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #ffffff;
+}
+
+.kh-dropdown-item {
+    display: block;
+    padding: 10px 14px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+}
+
+.kh-dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+.kh-menu-link-disabled {
+    color: #9ca3af !important;
+    cursor: not-allowed !important;
+    opacity: 0.6;
+    text-decoration: none;
+}
+
+.kh-dropdown-item-disabled {
+    color: #9ca3af !important;
+    cursor: not-allowed !important;
+    opacity: 0.6;
+    text-decoration: none;
+}
+
+/* --- AUTH BUTTONS (Đăng ký/Đăng nhập) --- */
+.kh-header-auth {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.kh-auth-btn {
+    text-decoration: none;
+    font-size: 13px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: all 0.3s;
+    font-weight: bold;
+}
+
+/* Nút Đăng nhập */
+.kh-btn-login {
+    color: #fff;
+    border: 1px solid #fff;
+}
+.kh-btn-login:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+/* Nút Đăng ký */
+.kh-btn-register {
+    background-color: #ff9f43; /* Màu cam */
+    color: #fff;
+    border: 1px solid #ff9f43;
+}
+.kh-btn-register:hover {
+    background-color: #ff8510;
+}
+
+/* --- User Profile (Khi đã đăng nhập) --- */
+.kh-user-profile {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+}
+
+.kh-user-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    padding: 5px 8px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.kh-user-icon:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+}
+
+.user-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    pointer-events: none;
+}
+
+.user-dropdown-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.user-dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: 13px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #ffffff;
+}
+
+.user-dropdown-menu a {
+    display: block;
+    padding: 12px 16px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.2s ease;
+}
+
+.user-dropdown-menu a:first-child {
+    padding-top: 16px;
+}
+
+.user-dropdown-menu a:last-child {
+    border-bottom: none;
+    padding-bottom: 16px;
+}
+
+.user-dropdown-menu a:hover {
+    background-color: #f8f9fa;
+    color: #212529;
+    border-radius: 0;
+}
+
+.user-dropdown-menu a:last-child:hover {
+    background-color: #ffeaea;
+    color: #dc3545;
+}
+
+.kh-welcome-text {
+        margin-right: 15px;
+        color: #ffffff;
+        font-size: 14px;
+    }
+    .kh-btn-logout {
+        background-color: #ef4444; /* Màu đỏ */
+        color: white;
+        padding: 8px 16px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 14px;
+        transition: background 0.3s;
+    }
+    .kh-btn-logout:hover {
+        background-color: #dc2626;
+    }
+    .kh-user-menu {
+        display: flex;
+        align-items: center;
+    }
+
+
+
+/* SweetAlert z-index override for header menu */
+.swal-header-menu {
+    z-index: 10000 !important;
+}
+
+/* Ẩn header trên mobile để sử dụng menu mobile */
+@media screen and (max-width: 768px) {
+    .kh-menu-link {
+        display: none;
+    }
+}

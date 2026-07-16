@@ -1,0 +1,135 @@
+.kh-profile-card {
+    max-width: 500px; /* Rộng hơn form login một chút */
+    text-align: center;
+}
+
+.kh-profile-header {
+    margin-bottom: 30px;
+}
+
+/* Avatar chữ cái đầu */
+.kh-avatar-circle {
+    width: 80px;
+    height: 80px;
+    background: #4f46e5; /* Màu chủ đạo */
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Khu vực chứa thông tin */
+.kh-profile-content {
+    background-color: #f8fafc;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+/* Từng dòng thông tin */
+.kh-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.kh-info-row:last-child {
+    border-bottom: none;
+}
+
+.kh-info-label {
+    font-weight: 500;
+    color: #64748b;
+    font-size: 0.95rem;
+}
+
+.kh-info-value {
+    font-weight: 600;
+    color: #1e293b;
+    font-size: 1rem;
+}
+
+/* Badge (Nhãn trạng thái) */
+.kh-badge {
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.kh-badge-success {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.kh-badge-warning {
+    background-color: #fef9c3;
+    color: #854d0e;
+}
+
+.kh-badge-admin {
+    background-color: #e0e7ff;
+    color: #3730a3;
+}
+
+.kh-badge-user {
+    background-color: #f1f5f9;
+    color: #475569;
+}
+
+/* Nút bấm ở trang profile */
+.kh-profile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.kh-btn-outline {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #4f46e5;
+    background: transparent;
+    color: #4f46e5;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.kh-btn-outline:hover {
+    background: #4f46e5;
+    color: white;
+}
+
+.kh-link-back {
+    color: #64748b;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.kh-link-back:hover {
+    text-decoration: underline;
+}
+
+/* Responsive cho Mobile */
+@media (max-width: 480px) {
+    .kh-info-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .kh-info-value {
+        width: 100%;
+        text-align: left; /* Căn trái trên mobile */
+    }
+}

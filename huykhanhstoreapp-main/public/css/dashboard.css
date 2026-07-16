@@ -1,0 +1,317 @@
+/* --- CẤU HÌNH CHUNG --- */
+:root {
+    --app-primary: #004a99;       /* Cam thương hiệu */
+    --app-bg: #f8f9fa;            /* Nền tổng thể xám rất nhạt */
+    --app-card: #ffffff;          /* Nền thẻ trắng */
+    --app-text-main: #1e293b;     /* Chữ chính (Xám đen) */
+    --app-text-sub: #64748b;      /* Chữ phụ (Xám ghi) */
+    --app-radius: 12px;           /* Bo góc lớn chuẩn App */
+    --app-shadow: 0 8px 30px rgba(0, 0, 0, 0.04); /* Bóng siêu mềm */
+}
+
+body {
+    background-color: var(--app-bg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--app-text-main);
+    -webkit-font-smoothing: antialiased; /* Làm mượt font trên Mac/iOS */
+}
+
+.k-app-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 20px 80px 20px; /* Padding bottom để tránh menu dưới */
+    box-sizing: border-box;
+}
+
+/* --- 1. APP HEADER (Top Bar) --- */
+.k-app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-top: 10px;
+}
+
+.k-user-info h1 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 600; /* Không quá dày */
+    color: var(--app-text-main);
+    letter-spacing: -0.5px;
+}
+
+.k-user-info p {
+    margin: 4px 0 0;
+    font-size: 14px;
+    color: var(--app-text-sub);
+    font-weight: 400;
+}
+
+.k-user-avatar {
+    width: auto;
+    min-width: 130px;        /* Tăng độ rộng để chứa đủ ngày tháng */
+    height: 54px;            /* Tăng chiều cao một chút cho thoáng */
+    border-radius: 12px;     /* Bo góc mềm mại */
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03); /* Bóng mờ tinh tế */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5px;
+}
+
+/* Dòng Giờ:Phút:Giây */
+.k-clock-time {
+    font-size: 20px;
+    font-weight: 700;        /* Số đậm, rõ ràng */
+    color: var(--app-primary); /* Màu cam chủ đạo */
+    line-height: 1;
+    font-variant-numeric: tabular-nums; /* Giúp các số không bị nhảy khi giây chạy */
+    margin-bottom: 4px;
+}
+
+/* Giây nhỏ hơn một chút cho tinh tế */
+.k-clock-time span {
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0.8;
+    margin-left: 1px;
+}
+
+/* Dòng Thứ, Ngày/Tháng/Năm */
+.k-clock-date {
+    font-size: 11px;
+    color: var(--app-text-sub);
+    font-weight: 600;
+    text-transform: capitalize; /* Viết hoa chữ cái đầu (Thứ Tư...) */
+    letter-spacing: 0.3px;
+}
+
+/* --- 2. STATS WIDGETS (Thẻ thống kê) --- */
+.k-widgets-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.k-widget-card {
+    background: var(--app-card);
+    border-radius: var(--app-radius);
+    padding: 20px;
+    box-shadow: var(--app-shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border: 1px solid rgba(0,0,0,0.02);
+    min-height: 140px;
+    position: relative;
+    overflow: hidden;
+}
+
+.k-widget-card:active {
+    transform: scale(0.98); /* Hiệu ứng nhấn nút trên mobile */
+}
+
+/* Icon nền mờ phía sau tạo chất "nghệ" */
+.k-widget-bg-icon {
+    position: absolute;
+    right: -10px;
+    bottom: -10px;
+    opacity: 0.05;
+    transform: rotate(-15deg);
+    color: var(--app-text-main);
+}
+.k-widget-bg-icon svg { width: 100px; height: 100px; }
+
+.k-widget-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+/* Màu icon nhẹ nhàng (Pastel) */
+.bg-orange { background: #fff7ed; color: #fb923c; }
+.bg-blue   { background: #eff6ff; color: #60a5fa; }
+.bg-green  { background: #f0fdf4; color: #4ade80; }
+.bg-purple { background: #faf5ff; color: #c084fc; }
+
+.k-widget-label {
+    font-size: 13px;
+    color: var(--app-text-sub);
+    font-weight: 500;
+}
+
+.k-widget-value {
+    font-size: 28px;
+    font-weight: 600; /* Số mỏng hơn, thanh thoát hơn */
+    color: var(--app-text-main);
+    letter-spacing: -1px;
+    margin-top: 5px;
+}
+
+/* --- 3. SECTION TITLE --- */
+.k-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.k-section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--app-text-main);
+    margin: 0;
+}
+
+.k-section-more {
+    font-size: 13px;
+    color: var(--app-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* --- 4. LIST (Danh sách công việc) --- */
+.k-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.k-list-item {
+    background: var(--app-card);
+    border-radius: 12px; /* Bo góc nhỏ hơn chút so với widget */
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: var(--app-shadow);
+    transition: background-color 0.2s;
+    text-decoration: none;
+}
+
+.k-list-item:active {
+    background-color: #f1f5f9; /* Feedback khi chạm */
+}
+
+.k-item-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 16px;
+    background: #f1f5f9;
+    color: var(--app-text-sub);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.k-item-content {
+    flex: 1;
+    min-width: 0; /* Fix lỗi flexbox text overflow */
+}
+
+.k-item-title {
+    margin: 0 0 4px 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--app-text-main);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.k-item-sub {
+    margin: 0;
+    font-size: 13px;
+    color: var(--app-text-sub);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 400;
+}
+
+.k-item-status {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 8px;
+    background: #f1f5f9;
+    color: var(--app-text-sub);
+}
+
+/* Trạng thái màu */
+.st-orange { background: #fff7ed; color: #ea580c; }
+.st-blue { background: #eff6ff; color: #2563eb; }
+.st-purple { background: #faf5ff; color: #9333ea; }
+.st-green  { background: #f0fdf4; color: #16a34a; }
+
+/* --- 5. NEWS CARDS (Tin tức ngang) --- */
+.k-news-scroll {
+    display: flex;
+    overflow-x: auto;
+    gap: 15px;
+    padding-bottom: 10px;
+    scrollbar-width: none; /* Ẩn thanh cuộn */
+}
+.k-news-scroll::-webkit-scrollbar { display: none; }
+
+.k-news-card {
+    min-width: 280px;
+    background: var(--app-card);
+    border-radius: var(--app-radius);
+    padding: 20px;
+    box-shadow: var(--app-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.k-news-tag {
+    align-self: flex-start;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #ef4444;
+    background: #fef2f2;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+.k-news-text {
+    font-size: 14px;
+    color: var(--app-text-main);
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+/* --- RESPONSIVE MOBILE --- */
+@media screen and (max-width: 768px) {
+    .k-app-wrapper {
+        padding: 15px 15px 80px 15px;
+    }
+
+    /* Trên mobile, Widget thành 2 cột vuông vắn */
+    .k-widgets-grid {
+        grid-template-columns: 1fr 1fr; 
+        gap: 12px;
+    }
+    
+    .k-widget-card {
+        min-height: 130px;
+        padding: 15px;
+    }
+
+    .k-widget-value {
+        font-size: 24px;
+    }
+}

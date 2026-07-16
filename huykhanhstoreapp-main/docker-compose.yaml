@@ -1,0 +1,54 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: huykhanhstoreapp:latest
+    container_name: huykhanhstoreapp
+    restart: unless-stopped
+    ports:
+      # 58080 nằm trong dải "dynamic/private port" (49152-65535 theo IANA),
+      # dải này gần như không app/service nào dùng làm cổng mặc định nên
+      # ít khả năng đụng cổng với các app khác đang chạy trên TrueNAS.
+      # Đổi qua biến môi trường APP_PORT nếu cần cổng khác.
+      - "${APP_PORT:-58080}:80"
+    environment:
+      APP_NAME: "Huy Khanh Store"
+      APP_ENV: production
+      APP_DEBUG: "false"
+      APP_URL: "${APP_URL:-http://localhost:58080}"
+      # Leave empty to auto-generate and persist a key on first run
+      # (see docker/entrypoint.sh). Set it here once you know it to
+      # pin it explicitly instead.
+      APP_KEY: "${APP_KEY:-}"
+
+      LOG_CHANNEL: stack
+      LOG_LEVEL: error
+
+      # SQLite lives inside the db_data volume below, so the same file
+      # is reused on every restart/rebuild instead of being recreated.
+      DB_CONNECTION: sqlite
+      DB_DATABASE: /var/www/html/database/database.sqlite
+
+      SESSION_DRIVER: database
+      CACHE_STORE: database
+      QUEUE_CONNECTION: database
+      FILESYSTEM_DISK: local
+
+      MAIL_MAILER: log
+    volumes:
+      # Persists database/database.sqlite across container rebuilds/updates.
+      - db_data:/var/www/html/database
+      # Persists uploaded files (product images, payment proofs), logs,
+      # sessions and the auto-generated APP_KEY across rebuilds/updates.
+      - storage_data:/var/www/html/storage
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/up"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+volumes:
+  db_data:
+  storage_data:

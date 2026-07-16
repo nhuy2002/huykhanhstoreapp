@@ -1,0 +1,79 @@
+/* --- FOOTER STYLES --- */
+.kh-footer {
+    background-color: #fff;
+    border-top: 1px solid #e2e8f0; /* Đường kẻ mờ ngăn cách */
+    padding: 20px 0;
+    margin-top: auto; /* Đẩy footer xuống đáy nếu nội dung ngắn */
+    width: 100%;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.kh-footer-inner {
+    display: flex;
+    justify-content: center; /* Đẩy 2 bên ra xa nhau */
+    align-items: center;
+    flex-wrap: wrap; /* Cho phép xuống dòng khi màn hình nhỏ */
+    gap: 15px;
+}
+
+.kh-copyright {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.kh-copyright strong {
+    color: #334155;
+    font-weight: 600;
+}
+
+.kh-dev-info {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #64748b;
+    gap: 8px;
+}
+
+.kh-dev-link {
+    color: #4f46e5; /* Màu xanh thương hiệu */
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.kh-dev-link:hover {
+    color: #4338ca;
+    text-decoration: underline;
+}
+
+.kh-dev-icon {
+    font-size: 1.1rem;
+}
+
+.kh-divider {
+    color: #cbd5e1;
+}
+
+.kh-version {
+    font-size: 0.8rem;
+    background: #f1f5f9;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #94a3b8;
+}
+
+/* Responsive Mobile: Căn giữa tất cả khi màn hình nhỏ */
+@media (max-width: 768px) {
+    .kh-footer-inner {
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+    }
+    
+    .kh-dev-info {
+        justify-content: center;
+    }
+}
