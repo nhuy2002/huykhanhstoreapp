@@ -1,0 +1,160 @@
+/* public/css/user-custom.css */
+
+/* --- Status Badges (Trạng thái) --- */
+.kh-badge {
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: inline-block;
+}
+.kh-badge-waiting { background-color: #fef3c7; color: #d97706; }   /* Chờ duyệt: Vàng */
+.kh-badge-reviewed { background-color: #dcfce7; color: #15803d; }  /* Đã duyệt: Xanh */
+
+/* --- Role Badges (Quyền hạn) --- */
+.kh-role-admin { 
+    background-color: #e0e7ff; color: #4338ca; 
+    border: 1px solid #c7d2fe;
+}
+.kh-role-user { 
+    background-color: #f1f5f9; color: #64748b; 
+    border: 1px solid #e2e8f0;
+}
+
+/* --- Mobile Card User --- */
+.kh-user-mobile-card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    margin-bottom: 10px;
+    border: 1px solid #e2e8f0;
+    cursor: pointer;
+}
+.kh-user-mobile-card:active { transform: scale(0.98); }
+
+.kh-usr-mob-row {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 8px; font-size: 0.9rem;
+}
+.kh-usr-mob-label { color: #64748b; }
+.kh-usr-mob-val { font-weight: 500; color: #1e293b; }
+
+.kh-usr-mob-actions {
+    margin-top: 10px; padding-top: 10px;
+    border-top: 1px dashed #e2e8f0;
+    display: flex; justify-content: flex-end; gap: 10px;
+}
+
+/* --- Avatar trong bảng --- */
+.kh-table-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    object-fit: cover; border: 1px solid #e2e8f0;
+    margin-right: 10px; vertical-align: middle;
+}
+
+/* --- Role Select Dropdown --- */
+.kh-role-select {
+    padding: 6px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    background-color: rgb(172, 222, 255);
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 80px;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 16px;
+    padding-right: 32px;
+}
+
+.kh-role-select:hover {
+    border-color: #9ca3af;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.kh-role-select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.kh-role-select option {
+    padding: 10px 12px;
+    background-color: white;
+    color: #374151;
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+/* --- MODAL CHI TIẾT --- */
+.kh-modal-user-info {
+    display: flex; flex-direction: column; gap: 15px; padding: 10px;
+}
+.kh-modal-row {
+    display: flex; justify-content: space-between; 
+    border-bottom: 1px solid #f1f5f9; padding-bottom: 10px;
+}
+.kh-modal-label { color: #64748b; font-weight: 500; }
+.kh-modal-value { color: #1e293b; font-weight: 600; }
+/* --- FIX LỖI MẤT Ô TÌM KIẾM TRÊN MOBILE --- */
+@media (max-width: 768px) {
+    /* Cho phép Header rớt dòng */
+    .kh-page-header {
+        display: flex;
+        flex-wrap: wrap !important;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+    }
+
+    /* 1. Tiêu đề nằm góc trái trên */
+    .kh-page-title {
+        order: 1;
+        flex: 1; /* Chiếm khoảng trống còn lại */
+        font-size: 1.2rem;
+        white-space: nowrap;
+    }
+
+    /* 2. Nhóm nút lọc (Filter) nằm góc phải trên */
+    /* Chọn thẻ div chứa các nút icon bên trong header */
+    .kh-page-header > div {
+        order: 2;
+    }
+
+    /* 3. Ô tìm kiếm nhảy xuống hàng dưới cùng */
+    .kh-search-form {
+        order: 3;
+        width: 100% !important;     /* Full màn hình */
+        max-width: 100% !important;
+        display: flex !important;   /* Đảm bảo luôn hiện */
+        margin-top: 5px;
+    }
+
+    /* Mobile role select styling */
+    .kh-role-select {
+        font-size: 0.8rem;
+        padding: 4px 8px;
+        min-width: 70px;
+        margin-right: 5px;
+    }
+
+    /* Mobile actions layout */
+    .kh-usr-mob-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        align-items: center;
+    }
+
+    .kh-usr-mob-actions .kh-action-btn {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+        white-space: nowrap;
+    }
+}

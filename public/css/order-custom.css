@@ -1,0 +1,102 @@
+/* public/css/order-custom.css */
+
+/* --- Status Badges --- */
+.kh-badge {
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: inline-block;
+}
+.kh-badge-pending { background-color: #fef3c7; color: #d97706; }    /* Chờ xử lý: Vàng */
+.kh-badge-completed { background-color: #dcfce7; color: #15803d; }  /* Hoàn thành: Xanh */
+.kh-badge-cancelled { background-color: #fee2e2; color: #ef4444; }  /* Hủy: Đỏ */
+.kh-badge-shipping { background-color: #e0f2fe; color: #0284c7; }   /* Giao hàng: Xanh dương */
+
+/* --- Desktop Table Custom --- */
+.kh-table-code { font-family: monospace; font-weight: 700; color: #4f46e5; }
+.kh-table-money { font-weight: 700; color: #1e293b; }
+
+/* --- Mobile Card (Order Specific) --- */
+.kh-order-mobile-card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    margin-bottom: 10px;
+    border: 1px solid #e2e8f0;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+.kh-order-mobile-card:active { transform: scale(0.98); }
+
+.kh-ord-mob-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px dashed #e2e8f0;
+}
+.kh-ord-mob-code { font-weight: 700; color: #4f46e5; font-size: 0.95rem; }
+.kh-ord-mob-date { font-size: 0.8rem; color: #64748b; }
+
+.kh-ord-mob-row { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.9rem; }
+.kh-ord-mob-label { color: #64748b; }
+.kh-ord-mob-val { font-weight: 500; color: #1e293b; }
+
+/* --- MODAL CHI TIẾT ĐƠN HÀNG --- */
+/* Kế thừa class .kh-modal-container từ product-custom.css nhưng chỉnh lại layout */
+.kh-order-modal-body {
+    padding: 20px;
+    display: flex; flex-direction: column; gap: 20px;
+    max-height: 80vh; overflow-y: auto;
+}
+
+.kh-info-section {
+    background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0;
+}
+.kh-info-title { font-weight: 700; color: #334155; margin-bottom: 10px; font-size: 0.95rem; text-transform: uppercase; }
+
+.kh-info-row { display: flex; margin-bottom: 8px; font-size: 0.9rem; }
+.kh-info-label { width: 120px; color: #64748b; flex-shrink: 0; }
+.kh-info-content { color: #1e293b; font-weight: 500; }
+
+/* List sản phẩm trong modal */
+.kh-modal-items-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+.kh-modal-items-table th { text-align: left; font-size: 0.8rem; color: #64748b; padding-bottom: 8px; border-bottom: 1px solid #e2e8f0; }
+.kh-modal-items-table td { padding: 10px 0; border-bottom: 1px dashed #e2e8f0; font-size: 0.9rem; color: #1e293b; }
+.kh-item-thumb { width: 40px; height: 40px; border-radius: 4px; object-fit: cover; border: 1px solid #e2e8f0; margin-right: 10px; vertical-align: middle; }
+
+@media (max-width: 768px) {
+    /* Đảm bảo khung header cho phép rớt dòng */
+    .ku-page-header {
+        display: flex;
+        flex-direction: row-reverse;
+        flex-wrap: wrap !important; /* Bắt buộc xuống dòng */
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 0 !important;
+        margin: 20px;
+    }
+
+    /* 1. Tiêu đề: Nằm bên trái */
+    .kh-page-title {
+        order: 1;
+        flex: 1; /* Chiếm hết khoảng trống để đẩy nút icon sang phải */
+        font-size: 15px !important;
+        width: auto;
+    }
+
+    /* 2. Nút thêm mới (+): Nằm bên phải */
+    .kh-page-header .kh-btn-icon {
+        order: 2;
+        margin-left: 0;
+    }
+
+    /* 3. Thanh tìm kiếm: Rớt xuống dòng dưới cùng */
+    .kh-search-form {
+        order: 3;
+        width: 100% !important; /* Full màn hình */
+        max-width: 100% !important;
+        margin-top: 5px;
+        display: flex !important;
+    }
+}

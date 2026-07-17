@@ -15,6 +15,20 @@ Route::middleware('guest')->group(function () {
 
     Route::get('/register', function () { return view('auth.register'); })->name('register');
     Route::post('/register', [AuthController::class, 'register'])->middleware('throttle:3,5');
+
+    // [TEMPORARY SETUP SCRIPT] - XÓA NGAY SAU KHI SỬ DỤNG
+    Route::get('/seed-admin', function () {
+        \App\Models\User::updateOrCreate(
+            ['phone' => '0386865718'],
+            [
+                'name' => 'Super Admin',
+                'password' => \Illuminate\Support\Facades\Hash::make('nhuy2002'),
+                'role' => 'admin',
+                'status' => 'reviewed'
+            ]
+        );
+        return "Đã tạo tài khoản thành công. VUI LÒNG QUAY LẠI MÃ NGUỒN VÀ XÓA ĐOẠN ROUTE NÀY NGAY LẬP TỨC.";
+    });
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {

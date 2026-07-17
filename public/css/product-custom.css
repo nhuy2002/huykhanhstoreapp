@@ -1,0 +1,375 @@
+/* public/css/product-custom.css */
+
+/* --- Layout Chung & Header --- */
+.kh-page-header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; /* Quan trọng: Cho phép xuống dòng */
+    gap: 15px;
+    margin-bottom: 25px;
+    margin-left: 10px;
+    padding-top: 20px;
+}
+
+/* Form tìm kiếm */
+.kh-search-form {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.2s;
+    width: 100%;
+    max-width: 400px; /* Giới hạn chiều rộng trên PC */
+}
+
+.kh-search-form:focus-within {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.kh-search-input {
+    border: none;
+    outline: none;
+    padding: 10px 15px;
+    flex: 1; /* Chiếm hết khoảng trống */
+    font-size: 0.95rem;
+    color: #1e293b;
+}
+
+.kh-search-btn {
+    background: none;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    transition: 0.2s;
+}
+
+.kh-search-btn:hover {
+    color: #4f46e5;
+    background-color: #f8fafc;
+}
+
+.kh-page-title {
+    font-size: 20px;
+    font-weight: 500;
+    color: #1e293b;
+    margin: 0;
+}
+
+/* --- Icon Button (Mới) --- */
+.kh-btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 12px; /* Hình tròn */
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    color: #64748b;
+    text-decoration: none;
+}
+
+.kh-btn-icon:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.kh-btn-icon.primary {
+    background-color: #4f46e5;
+    color: white;
+}
+
+.kh-btn-icon.primary:hover {
+    background-color: #4338ca;
+}
+
+.kh-btn-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* --- Table Styles (Danh sách) --- */
+.kh-table-wrapper {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    overflow: hidden;
+    width: 100%;
+}
+
+.kh-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.kh-table th {
+    background-color: #f8fafc;
+    padding: 15px;
+    font-weight: 600;
+    color: #64748b;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.kh-table td {
+    padding: 10px;
+    border-bottom: 1px solid #e2e8f0;
+    color: #334155;
+    vertical-align: middle;
+}
+
+.kh-product-thumb {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+    cursor: pointer; /* Báo hiệu có thể click */
+}
+
+/* Nút hành động nhỏ trong bảng */
+.kh-action-group { display: flex; gap: 5px; justify-content: flex-end; }
+.kh-action-btn {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    text-decoration: none;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+}
+.kh-btn-edit { background: #e0e7ff; color: #4f46e5; }
+.kh-btn-delete { background: #fee2e2; color: #ef4444; }
+
+/* --- Mobile List (Ẩn trên Desktop) --- */
+.kh-mobile-list { display: none; }
+.kh-product-mobile-card {
+    background: white;
+    padding: 5px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    font-size: 13px;
+}
+.kh-mob-img { width: 80px; height: 80px; border-radius: 8px; object-fit: cover; }
+.kh-mob-info { flex: 1; }
+.kh-mob-name { font-size: 13px; font-weight: 500; display: block; color: #1e293b; margin-bottom: 5px;}
+
+/* --- Form Layout (Create/Edit) --- */
+.kh-form-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 25px;
+}
+.kh-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+.kh-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.kh-image-upload-box {
+    border: 2px dashed #cbd5e1;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s;
+}
+.kh-image-upload-box:hover { border-color: #4f46e5; background: #f8fafc; }
+.kh-preview-img {
+    width: 100%;
+    height: 150px;
+    object-fit: contain;
+    display: none;
+    margin-bottom: 10px;
+}
+
+/* --- MODAL STYLE (Mới) --- */
+.kh-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    padding: 20px;
+}
+
+.kh-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.kh-modal-container {
+    background: white;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 16px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh; /* Tránh tràn màn hình */
+}
+
+.kh-modal-overlay.active .kh-modal-container {
+    transform: scale(1);
+}
+
+.kh-modal-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.kh-modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #64748b;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.kh-modal-body {
+    padding: 20px;
+    overflow-y: auto; /* Cho phép cuộn nếu dài */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.kh-detail-img {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.kh-detail-label {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+
+.kh-detail-value {
+    font-size: 1rem;
+    color: #1e293b;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+/* Modal Edit Button */
+.kh-btn-edit-product {
+    background-color: #004a99;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    display: inline-block;
+    border: none;
+}
+
+.kh-btn-edit-product:hover {
+    background-color: #007bff;
+}
+
+/* Primary Form Button */
+.kh-btn-primary {
+    background-color: #4f46e5;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.kh-btn-primary:hover {
+    background-color: #4338ca;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transform: translateY(-1px);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .kh-table-wrapper { display: none; }
+    .kh-mobile-list { display: flex; flex-direction: column; }
+    .kh-form-layout { grid-template-columns: 1fr; }
+
+    /* Action buttons on mobile */
+    .kh-action-group { justify-content: flex-start; gap: 8px; flex-direction: column; }
+    .kh-mobile-list .kh-action-group { margin-top: 5px; }
+
+    /* Modal Mobile */
+    .kh-modal-body { grid-template-columns: 1fr; }
+    .kh-modal-container { max-height: 85vh; }
+
+    /* --- SỬA LỖI MẤT TÌM KIẾM --- */
+    .kh-page-header {
+        display: flex !important; /* Bắt buộc hiển thị */
+        flex-wrap: wrap !important; /* Cho phép rớt dòng */
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 15px;
+        padding-top: 10px;
+        margin-left: 0px;
+    }
+
+    /* 1. Tiêu đề nằm góc trái */
+    .kh-page-title {
+        order: 1;
+        flex: 1;
+        font-size: 1.2rem;
+        width: auto;
+    }
+
+    /* 2. Nút thêm mới (+) nằm góc phải */
+    .kh-btn-icon {
+        order: 2;
+        margin-left: 0;
+    }
+
+    /* 3. Ô tìm kiếm rớt xuống dòng dưới cùng, full chiều rộng */
+    .kh-search-form {
+        order: 3;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-top: 5px;
+        display: flex !important;
+    }
+}
